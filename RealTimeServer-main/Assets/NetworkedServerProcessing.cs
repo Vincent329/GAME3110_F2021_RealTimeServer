@@ -4,6 +4,7 @@ using UnityEngine;
 
 static public class NetworkedServerProcessing
 {
+    
     #region Send and Receive Data Functions
     static public void ReceivedMessageFromClient(string msg, int id)
     {
@@ -12,11 +13,9 @@ static public class NetworkedServerProcessing
         string[] csv = msg.Split(',');
         int signifier = int.Parse(csv[0]);
 
-        if (signifier == ClientToServerSignifiers.BalloonClicked)
+        if (signifier == ClientToServerSignifiers.asd)
         {
-            int refID = int.Parse(csv[1]);
-            Debug.Log("Balloon with ref ID == " + refID + " has been clicked!");
-            gameLogic.GetComponent<GameLogic>().PopBalloon(refID, id);
+
         }
         // else if (signifier == ClientToServerSignifiers.asd)
         // {
@@ -36,12 +35,10 @@ static public class NetworkedServerProcessing
     static public void DisconnectionEvent(int clientConnectionID)
     {
         Debug.Log("New Disconnection, ID == " + clientConnectionID);
-        gameLogic.GetComponent<GameLogic>().RemoveConnectedClient(clientConnectionID);
     }
     static public void ConnectionEvent(int clientConnectionID)
     {
         Debug.Log("New Connection, ID == " + clientConnectionID);
-        gameLogic.GetComponent<GameLogic>().AddConnectedClient(clientConnectionID);
     }
 
     #endregion
@@ -69,15 +66,12 @@ static public class NetworkedServerProcessing
 #region Protocol Signifiers
 static public class ClientToServerSignifiers
 {
-    public const int BalloonClicked = 1;
+    public const int asd = 1;
 }
 
 static public class ServerToClientSignifiers
 {
-    public const int SpawnBalloon = 1;
-    public const int BalloonWasPopped = 2;
-    public const int ScoreAndID = 3;
-    public const int PlayerHasLeft = 4;
+    public const int asd = 1;
 }
 
 #endregion
